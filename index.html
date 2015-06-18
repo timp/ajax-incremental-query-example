@@ -1,0 +1,52 @@
+<html>
+<style>
+BODY {
+  font-family: "Arial", sans-serif;
+}
+</style>
+<script>
+function noticed(field) { 
+  //log("Noticed:"+field.value + " for " + field.id);
+  loadJsonEventually(field.value.toLowerCase() + ".json", field.id);
+}
+function log(string) { 
+  document.getElementById('log').innerHTML = document.getElementById('log').innerHTML + string + "<br>\n";
+}
+function loadJsonEventually(filePath, fieldName) {
+  var xmlhttp=new XMLHttpRequest();
+  xmlhttp.onreadystatechange=function(){
+    if (xmlhttp.readyState==4 && xmlhttp.status==200){
+      loadDatalist(fieldName + "_options", xmlhttp.responseText);
+    }
+  }
+  xmlhttp.open("GET",filePath,true);
+  xmlhttp.send();
+}
+
+function loadDatalist(id, json) { 
+  var jsonObj = JSON.parse(json);
+  var list;
+  var field = document.getElementById(id);
+  var html="";
+  for (i in jsonObj.values) {
+    html += "<option value=\"" + jsonObj.values[i] + "\">" + jsonObj.values[i] + "</option>";
+  }
+  field.innerHTML = html;
+}
+
+</script>
+<div style="margin-left:100px; margin-top:50px; width: 40%; padding:20px;">
+<h3>Incremental Query Input Box</h3>
+<div style="margin:20px; border:1px solid blue; width: 80%; padding:20px;">
+<p>Start typing <b>Anne</b><p>
+<form>
+<label for="f1">Name: </label>
+<input id="f1" onkeyup="noticed(this);" list="f1_options">
+<datalist id="f1_options" >
+</datalist>
+</input>
+</form>
+</div>
+</div>
+<p id=log></p>
+</html>
