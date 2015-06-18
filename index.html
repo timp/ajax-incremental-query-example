@@ -1,4 +1,8 @@
 <html>
+<head>
+<title>
+Asynchronous Ajax Incremental Query Example
+</title>
 <style>
 BODY {
   font-family: "Arial", sans-serif;
@@ -6,13 +10,10 @@ BODY {
 </style>
 <script>
 function noticed(field) { 
-  //log("Noticed:"+field.value + " for " + field.id);
-  loadJsonEventually(field.value.toLowerCase() + ".json", field.id);
+  console.log("Noticed:"+field.value + " for " + field.id);
+  loadJsonAsync(field.value.toLowerCase() + ".json", field.id);
 }
-function log(string) { 
-  document.getElementById('log').innerHTML = document.getElementById('log').innerHTML + string + "<br>\n";
-}
-function loadJsonEventually(filePath, fieldName) {
+function loadJsonAsync(filePath, fieldName) {
   var xmlhttp=new XMLHttpRequest();
   xmlhttp.onreadystatechange=function(){
     if (xmlhttp.readyState==4 && xmlhttp.status==200){
@@ -35,18 +36,20 @@ function loadDatalist(id, json) {
 }
 
 </script>
+</head>
+<body>
 <div style="margin-left:100px; margin-top:50px; width: 40%; padding:20px;">
 <h3>Incremental Query Input Box</h3>
 <div style="margin:20px; border:1px solid blue; width: 80%; padding:20px;">
 <p>Start typing <b>Anne</b><p>
 <form>
-<label for="f1">Name: </label>
-<input id="f1" onkeyup="noticed(this);" list="f1_options">
-<datalist id="f1_options" >
-</datalist>
-</input>
+ <label for="f1">Name: </label>
+ <input id="f1" onkeyup="noticed(this);" list="f1_options">
+  <datalist id="f1_options" >
+  </datalist>
+ </input>
 </form>
 </div>
 </div>
-<p id=log></p>
+</body>
 </html>
