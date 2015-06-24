@@ -1,55 +1,27 @@
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-<title>
-Asynchronous Ajax Incremental Query Example
-</title>
-<style>
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1" />
+ <style>
 BODY {
   font-family: "Arial", sans-serif;
-</style>
-<script>
-function noticed(field) { 
-  console.log("Noticed:"+field.value + " for " + field.id);
-  loadJsonAsync(field.value.toLowerCase() + ".json", field.id);
-}
-function loadJsonAsync(filePath, fieldName) {
-  var xmlhttp=new XMLHttpRequest();
-  xmlhttp.onreadystatechange=function(){
-    if (xmlhttp.readyState==4 && xmlhttp.status==200){
-      loadDatalist(fieldName + "_options", xmlhttp.responseText);
-    }
-  }
-  xmlhttp.open("GET",filePath,true);
-  xmlhttp.send();
-}
-
-function loadDatalist(id, json) { 
-  var jsonObj = JSON.parse(json);
-  var list;
-  var field = document.getElementById(id);
-  var html="";
-  for (i in jsonObj.values) {
-    html += "<option value=\"" + jsonObj.values[i] + "\">" + jsonObj.values[i] + "</option>";
-  }
-  field.innerHTML = html;
-}
-
-</script>
+ </style>
+ <title>
+Asynchronous Ajax Incremental Query Examples
+ </title>
 </head>
 <body>
 <a href="https://github.com/timp/ajax-incremental-query-example"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/652c5b9acfaddf3a9c326fa6bde407b87f7be0f4/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6f72616e67655f6666373630302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png"></a>
 <div style="margin-left:100px; margin-top:50px; width: 40%; padding:20px; background-color: #ffffff;">
-<h3>Incremental Query Input Box</h3>
-<div style="margin:20px; border:1px solid blue; width: 80%; padding:20px;">
-<p>Start typing, <b>Anne</b> for example</p>
-<form>
- <label for="f1">Name: </label>
- <input id="f1" onkeyup="noticed(this);" list="f1_options">
-  <datalist id="f1_options" >
-  </datalist>
- </input>
-</form>
-</div>
-</div>
+<h2>Examples of Aysnchronous Incremental Queries</h2>
+<ul>
+<li>
+<a href="ecma.html">Plain Javascript</a>
+</li>
+<li>
+<a href="jquery.html">JQuery</a>
+</li>
+</ul>
 </body>
 </html>
